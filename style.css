@@ -1,0 +1,1328 @@
+/* ==========================================
+   1. RESET & VARIÁVEIS GLOBAIS
+   ========================================== */
+:root {
+  --bg-light: #fbf9f6;
+  --bg-card: #f4efe9;
+  --bg-dark: #191817;
+  --text-main: #2b2825;
+  --text-muted: #6e675f;
+  --gold-accent: #c5a059;
+  --gold-hover: #a38141;
+  --whatsapp-color: #25d366;
+  --font-logo: 'Antonio', sans-serif;
+  --font-title: 'Cormorant Garamond', serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  padding-bottom: 70px;
+  letter-spacing: -0.01em;
+  /* Espaço para a barra fixa mobile */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 25px;
+}
+
+/* ==========================================
+   2. HEADER & NAVBAR (DESKTOP & MOBILE)
+   ========================================== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 18px 0;
+  z-index: 1000;
+  background: rgba(251, 249, 246, 0.95);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+  /* Transição suave para o efeito de esconder/mostrar */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+}
+
+/* Classe dinâmica que o JavaScript vai adicionar */
+header.nav-hidden {
+  transform: translateY(-100%);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 25px;
+}
+
+.logo {
+  font-family: 'Antonio', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #c0c0c0;
+  /* Cor prateada/champanhe clara da imagem */
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+/* Detalhe exclusivo para a letra 'A' da imagem */
+.logo .gold-a {
+  background: linear-gradient(180deg, #e6c88b 0%, #b88e4c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 400;
+}
+
+.menu-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-main);
+  cursor: pointer;
+  display: block;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 320px;
+  height: 100vh;
+  background-color: var(--bg-light);
+  padding: 90px 30px 40px;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+  transition: var(--transition);
+  z-index: 999;
+}
+
+nav.active {
+  right: 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+nav a {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: var(--text-main);
+  transition: var(--transition);
+}
+
+nav a:hover {
+  color: var(--gold-accent);
+}
+
+.nav-close {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 1.8rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================
+   3. HERO SECTION
+   ========================================== */
+.hero {
+  min-height: 92vh;
+  padding: 140px 20px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  background: linear-gradient(180deg, rgba(25, 24, 23, 0.6) 0%, rgba(25, 24, 23, 0.75) 100%),
+    url('img/hero-casal-terno-claro-vestido-terracota-900.webp') center 35%/cover no-repeat;
+  color: #ffffff;
+}
+
+/* Computador: recorte horizontal da mesma foto (mais leve e já enquadrado) */
+@media (min-width: 768px) {
+  .hero {
+    background: linear-gradient(180deg, rgba(25, 24, 23, 0.6) 0%, rgba(25, 24, 23, 0.75) 100%),
+      url('img/hero-casal-terno-claro-vestido-terracota-1600.webp') center 70%/cover no-repeat;
+  }
+}
+
+.hero-content {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.hero-tag {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-style: italic;
+  color: var(--gold-accent);
+  margin-bottom: 12px;
+  display: block;
+  letter-spacing: 1px;
+}
+
+.hero-title {
+  font-family: var(--font-sans);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: #e5e0d8;
+  margin: 0 auto 35px;
+  font-weight: 300;
+  max-width: 680px;
+  line-height: 1.6;
+}
+
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-primary {
+  background-color: var(--gold-accent);
+  color: #ffffff;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+  width: 100%;
+  max-width: 320px;
+}
+
+.btn-primary:hover {
+  background-color: var(--gold-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(197, 160, 89, 0.5);
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: #ffffff;
+  padding: 15px 36px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  width: 100%;
+  max-width: 320px;
+}
+
+.btn-secondary:hover {
+  background-color: #ffffff;
+  color: var(--text-main);
+}
+
+/* ==========================================
+   4. SOBRE & SERVIÇOS
+   ========================================== */
+.section-padding {
+  padding: 80px 0;
+}
+
+.section-tag {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--gold-accent);
+  font-style: italic;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.about-images {
+  position: relative;
+}
+
+.about-img-main {
+  border-radius: 6px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  width: 100%;
+}
+
+.services-bg {
+  background-color: var(--bg-card);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.service-card {
+  background-color: var(--bg-light);
+  padding: 35px 25px;
+  border-radius: 6px;
+  border: 1px solid rgba(197, 160, 89, 0.15);
+  transition: var(--transition);
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold-accent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.service-icon {
+  font-size: 2rem;
+  color: var(--gold-accent);
+  margin-bottom: 15px;
+}
+
+.service-card h3 {
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ==========================================
+   5. PORTFÓLIO INSTAGRAM
+   ========================================== */
+.portfolio-filters {
+  display: flex;
+  gap: 10px;
+  margin: 30px 0 40px;
+  justify-content: flex-start;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid rgba(110, 103, 95, 0.3);
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  transition: var(--transition);
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background-color: var(--gold-accent);
+  color: #ffffff;
+  border-color: var(--gold-accent);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.portfolio-item {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background-color: #e5e0d8;
+  cursor: pointer;
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.06);
+}
+
+.portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(25, 24, 23, 0.85), transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 25px;
+  color: #ffffff;
+  text-align: left;
+  opacity: 1;
+  transition: var(--transition);
+}
+
+.portfolio-overlay .category-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gold-accent);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.portfolio-overlay h3 {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+}
+
+.portfolio-overlay p {
+  font-size: 0.85rem;
+  color: #d1ccc5;
+}
+
+.portfolio-item.hide {
+  display: none;
+}
+
+/* ==========================================
+   6. MODAL LIGHTBOX
+   ========================================== */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.lightbox-modal.active {
+  display: flex;
+}
+
+.lightbox-content {
+  width: 100%;
+  max-width: 650px;
+  position: relative;
+  text-align: center;
+}
+
+.lightbox-content img {
+  max-height: 70vh;
+  margin: 0 auto;
+  border-radius: 6px;
+  object-fit: contain;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-caption {
+  color: #ffffff;
+  margin-top: 15px;
+}
+
+.lightbox-caption h3 {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  color: var(--gold-accent);
+}
+
+.lightbox-caption p {
+  font-size: 0.9rem;
+  color: #a09a92;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  color: #ffffff;
+  font-size: 2.2rem;
+  cursor: pointer;
+}
+
+/* ==========================================
+   7. DEPOIMENTOS & LOCALIZAÇÃO
+   ========================================== */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 25px;
+  margin-top: 40px;
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.testimonial-card {
+  background: var(--bg-light);
+  padding: 30px 25px;
+  border-radius: 6px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.testimonial-card i {
+  color: var(--gold-accent);
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.testimonial-card p {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.testimonial-author {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--gold-accent);
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.info-item i {
+  font-size: 1.2rem;
+  color: var(--gold-accent);
+  margin-top: 4px;
+}
+
+.map-container {
+  width: 100%;
+  height: 380px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ==========================================
+   8. BANNER DE CONVERSÃO FINAL & FOOTER PROFISSIONAL
+   ========================================== */
+.cta-banner {
+  background-color: var(--bg-card);
+  color: #050505;
+  padding: 80px 20px;
+  text-align: center;
+  border-top: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.cta-banner h2 {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.cta-banner p {
+  color: #a09a92;
+  max-width: 650px;
+  margin: 0 auto 35px;
+  font-size: 1rem;
+}
+
+.footer-site {
+  background-color: #121110;
+  color: #a09a92;
+  padding: 70px 0 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.9rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.logo-footer {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.logo-footer span {
+  color: var(--gold-accent);
+}
+
+.footer-desc {
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-socials a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-accent);
+  font-size: 1.1rem;
+  transition: var(--transition);
+  border: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.footer-socials a:hover {
+  background: var(--gold-accent);
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+.footer-title {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.footer-links,
+.footer-contact-info {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links a {
+  color: #a09a92;
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  color: var(--gold-accent);
+  padding-left: 5px;
+}
+
+.footer-contact-info li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-contact-info i {
+  color: var(--gold-accent);
+}
+
+/* Coluna Vittino Fly */
+.developer-col {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px solid rgba(197, 160, 89, 0.15);
+}
+
+.dev-tagline {
+  font-size: 0.82rem;
+  color: #c5c0b8;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.dev-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dev-portfolio-btn {
+  background-color: transparent;
+  border: 1px solid var(--gold-accent);
+  color: var(--gold-accent);
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-align: center;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dev-portfolio-btn:hover {
+  background-color: var(--gold-accent);
+  color: #ffffff;
+}
+
+.dev-whatsapp-btn {
+  background-color: var(--whatsapp-color);
+  color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-align: center;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dev-whatsapp-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 0.8rem;
+}
+
+.footer-bottom strong {
+  color: #ffffff;
+}
+
+.dev-credit a {
+  color: var(--gold-accent);
+  transition: var(--transition);
+}
+
+.dev-credit a:hover {
+  text-decoration: underline;
+}
+
+/* BARRA FIXA MOBILE */
+.mobile-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  padding: 12px 20px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  z-index: 1000;
+}
+
+.mobile-bottom-btn {
+  background-color: var(--whatsapp-color);
+  color: #ffffff;
+  width: 100%;
+  padding: 14px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ==========================================
+   9. RESPONSIVIDADE DESKTOP
+   ========================================== */
+@media (min-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cta-group {
+    flex-direction: row;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-bottom: 0;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  nav {
+    position: static;
+    width: auto;
+    max-width: none;
+    height: auto;
+    padding: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  nav ul {
+    flex-direction: row;
+    gap: 35px;
+  }
+
+  .nav-close {
+    display: none;
+  }
+
+  .mobile-bottom-bar {
+    display: none;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+  }
+
+  /* 5 cards: 3 na primeira linha, 2 na segunda */
+  .services-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .services-grid .service-card {
+    grid-column: span 2;
+  }
+
+  .services-grid .service-card:nth-child(n+4) {
+    grid-column: span 3;
+  }
+
+  .portfolio-filters {
+    justify-content: center;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .location-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Esconde o selo do Netlify pelo ID ou classe comum */
+#netlify-deploy-badge,
+.netlify-badge {
+  display: none !important;
+}
+
+/* ==========================================
+   ANIMAÇÕES (skill landing-page-cliente)
+   Movimento só com transform/opacity. Tudo desligado em prefers-reduced-motion
+   e, sem JavaScript, nada fica escondido (o JS adiciona a classe .js no <html>).
+   ========================================== */
+:root {
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 0.2s;
+  --duration-base: 0.45s;
+  --duration-slow: 0.9s;
+}
+
+/* Header: encolhe e ganha sombra ao rolar */
+header {
+  transition: transform 0.4s var(--ease), padding 0.3s var(--ease), box-shadow 0.3s ease, background 0.3s ease;
+}
+
+header.is-scrolled {
+  padding: 12px 0;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Link da seção atual (scrollspy) com sublinhado dourado animado */
+nav a {
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: var(--gold-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-base) var(--ease);
+}
+
+nav a:hover::after,
+nav a.is-active::after {
+  transform: scaleX(1);
+}
+
+nav a.is-active {
+  color: var(--gold-hover);
+}
+
+/* Foco visível em tudo que é clicável */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+.portfolio-item:focus-visible {
+  outline: 2px solid var(--gold-accent);
+  outline-offset: 3px;
+}
+
+/* Galeria: entrada suave ao trocar o filtro */
+.portfolio-item.is-filtering {
+  animation: filterIn 0.5s var(--ease) both;
+}
+
+/* Lightbox: botões e entrada */
+.lightbox-close {
+  background: transparent;
+  border: 0;
+  line-height: 1;
+  padding: 4px 8px;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 35vh;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(25, 24, 23, 0.55);
+  color: #ffffff;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease;
+  z-index: 1;
+}
+
+.lightbox-nav:hover {
+  background: var(--gold-hover);
+  border-color: var(--gold-hover);
+}
+
+.lightbox-nav--prev {
+  left: 4px;
+}
+
+.lightbox-nav--next {
+  right: 4px;
+}
+
+@media (min-width: 768px) {
+  .lightbox-nav--prev {
+    left: -64px;
+  }
+
+  .lightbox-nav--next {
+    right: -64px;
+  }
+}
+
+/* Botões de WhatsApp: anel de pulso suave que para no hover */
+.btn-pulse {
+  position: relative;
+  isolation: isolate;
+}
+
+.btn-pulse::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid currentColor;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.btn-primary.btn-pulse::after {
+  border-color: var(--gold-accent);
+}
+
+.mobile-bottom-btn.btn-pulse::after {
+  border-color: var(--whatsapp-color);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* Scroll reveal: o JS adiciona .is-visible e, ao terminar, limpa o atributo */
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity var(--duration-slow) var(--ease), transform var(--duration-slow) var(--ease);
+  }
+
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Hero: entra em sequência na carga */
+  .js .hero-tag,
+  .js .hero-subtitle,
+  .js .hero .cta-group {
+    animation: heroIn 1s var(--ease) both;
+  }
+
+  .js .hero-tag {
+    animation-delay: 0.05s;
+  }
+
+  .js .hero-subtitle {
+    animation-delay: 0.55s;
+  }
+
+  .js .hero .cta-group {
+    animation-delay: 0.7s;
+  }
+
+  /* Animação assinatura: título revelado palavra por palavra */
+  .hero-title .word {
+    display: inline-block;
+    animation: wordIn 0.9s var(--ease) both;
+    animation-delay: calc(0.15s + var(--i) * 0.06s);
+  }
+
+  .btn-pulse::after {
+    animation: pulseRing 2.6s var(--ease) infinite;
+  }
+
+  .btn-pulse:hover::after,
+  .btn-pulse:focus-visible::after {
+    animation: none;
+  }
+
+  .lightbox-modal.active {
+    animation: fadeIn 0.3s ease both;
+  }
+
+  .lightbox-modal.active .lightbox-content img {
+    animation: zoomIn 0.45s var(--ease) both;
+  }
+
+  .faq-item summary::after {
+    transition: transform var(--duration-base) var(--ease);
+  }
+
+  [data-magnetic] {
+    transition: transform 0.25s var(--ease), background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes wordIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.12, 1.35);
+  }
+}
+
+@keyframes filterIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+/* ==========================================
+   10. AJUSTES LA ROSE TRAJES A RIGOR
+   ========================================== */
+.hero {
+  background-position: center 30%;
+}
+
+.logo {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo .logo-name {
+  display: inline-flex;
+}
+
+.logo .logo-sub {
+  font-family: var(--font-sans);
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 3.5px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.footer-col .logo .logo-sub {
+  color: #a09a92;
+}
+
+.footer-col .logo {
+  margin-bottom: 15px;
+}
+
+.portfolio-item img {
+  object-position: center top;
+}
+
+/* Perguntas frequentes */
+.faq-list {
+  max-width: 820px;
+  margin: 40px auto 0;
+  display: grid;
+  gap: 14px;
+}
+
+.faq-item {
+  background-color: var(--bg-light);
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.faq-item[open] {
+  border-color: var(--gold-accent);
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 20px 56px 20px 24px;
+  position: relative;
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: '+';
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  color: var(--gold-hover);
+  transition: var(--transition);
+}
+
+.faq-item[open] summary::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.faq-item p {
+  padding: 0 24px 22px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Item de destaque (clutches) ocupa 2x2 e fecha a grade sem sobras */
+@media (min-width: 768px) {
+  .portfolio-grid {
+    grid-auto-flow: dense;
+  }
+
+  .portfolio-item.destaque {
+    grid-column: span 2;
+    grid-row: span 2;
+    aspect-ratio: auto;
+  }
+}
+
+/* ==========================================
+   UTILITÁRIOS (antes eram style="" no HTML)
+   ========================================== */
+.text-center { text-align: center; }
+.about-text { color: var(--text-muted); margin-bottom: 20px; }
+.about-btn { margin-top: 10px; }
+.portfolio-more { margin-top: 40px; }
+.portfolio-more .btn-secondary { color: var(--text-main); border-color: var(--text-main); }
+.cta-banner .btn-primary { margin: 0 auto; }
+.portfolio-item img.img-pos-low { object-position: center 60%; }
