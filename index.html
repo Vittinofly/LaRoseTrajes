@@ -811,6 +811,8 @@
         <button class="filter-btn" data-filter="clutches">Clutches</button>
       </div>
 
+      <!-- Galeria recolhida: mostra a 1ª fileira (2 fotos no celular) + parte da próxima, com botão "Ver mais" -->
+      <div class="gallery-wrapper is-collapsed" id="galleryWrapper">
       <div class="portfolio-grid">
         <div class="portfolio-item ternos vestidos vermelhos" data-reveal tabindex="0" role="button"
           data-full="img/casal-terno-claro-vestido-terracota.jpg" data-title="Casal: Terno Claro e Vestido Terracota" data-desc="Casal com terno claro e vestido terracota de ombro único com babado, em casamento à beira do lago.">
@@ -1021,6 +1023,13 @@
             <p>Cetim com Drapeado Lateral</p>
           </div>
         </div>
+      </div>
+      </div>
+
+      <div class="gallery-more" id="galleryMore" hidden>
+        <button type="button" class="btn-more" id="galleryMoreBtn" aria-expanded="false" aria-controls="galleryWrapper">
+          <span>Ver mais modelos</span> <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </button>
       </div>
 
       <div class="portfolio-more">

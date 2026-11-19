@@ -202,8 +202,65 @@
             item.classList.add('is-filtering');
           }
         });
+        updateCollapse();
       });
     });
+
+    // Galeria recolhida: 1 fileira + parte da 2ª (tablet/computador) ou 2 fotos + parte da 3ª (celular)
+    const wrapper = document.getElementById('galleryWrapper');
+    const more = document.getElementById('galleryMore');
+    const moreBtn = document.getElementById('galleryMoreBtn');
+
+    function updateCollapse() {
+      if (!wrapper || !more || !moreBtn) return;
+      const visible = [...items].filter(item => !item.classList.contains('hide'));
+      const rowTops = [...new Set(visible.map(item => item.offsetTop))].sort((a, b) => a - b);
+      const fullRows = window.innerWidth < 768 ? 2 : 1;
+
+      // Poucas fotos (ex.: filtro "Clutches"): mostra tudo, sem botão, mas guarda se estava recolhida
+      const short = rowTops.length <= fullRows + 1;
+      wrapper.classList.toggle('is-short', short);
+      more.hidden = short;
+      if (short) {
+        wrapper.style.maxHeight = 'none';
+        return;
+      }
+
+      if (wrapper.classList.contains('is-collapsed')) {
+        const peek = visible[0].offsetHeight * 0.45;
+        wrapper.style.maxHeight = (rowTops[fullRows] - rowTops[0] + peek) + 'px';
+      } else {
+        wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+      }
+    }
+
+    function setExpanded(expanded) {
+      wrapper.classList.toggle('is-collapsed', !expanded);
+      moreBtn.setAttribute('aria-expanded', expanded);
+      moreBtn.querySelector('span').textContent = expanded ? 'Ver menos' : 'Ver mais modelos';
+      updateCollapse();
+    }
+
+    if (wrapper && more && moreBtn) {
+      moreBtn.addEventListener('click', () => {
+        const expanding = wrapper.classList.contains('is-collapsed');
+        setExpanded(expanding);
+        if (!expanding) {
+          document.getElementById('portfolio').scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth' });
+        }
+      });
+
+      // Quem navega pelo teclado e chega numa foto escondida abre a galeria inteira
+      wrapper.addEventListener('focusin', e => {
+        if (!wrapper.classList.contains('is-collapsed') || wrapper.classList.contains('is-short')) return;
+        const item = e.target.closest('.portfolio-item');
+        if (item && item.offsetTop + item.offsetHeight > wrapper.clientHeight) setExpanded(true);
+      });
+
+      window.addEventListener('resize', updateCollapse);
+      window.addEventListener('load', updateCollapse);
+      updateCollapse();
+    }
 
     items.forEach(item => {
       item.addEventListener('keydown', e => {
